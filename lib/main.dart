@@ -1,3 +1,4 @@
+import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bluetooth_connector/config/router/app_router.dart';
@@ -16,10 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Bluetooth connector',
       debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme().getTheme(),
     );
   }
 }
