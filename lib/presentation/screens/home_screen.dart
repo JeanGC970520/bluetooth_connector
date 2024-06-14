@@ -1,8 +1,10 @@
+import 'package:bluetooth_connector/config/router/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -154,7 +156,7 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 20,),
       
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => context.go(Routes.dashboard.path),
             style: ElevatedButton.styleFrom(
               minimumSize: Size(double.infinity, size.height * 0.06)
             ), 
