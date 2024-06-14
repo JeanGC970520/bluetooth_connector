@@ -7,6 +7,7 @@ import 'package:bluetooth_connector/presentation/screens/screens.dart';
 final appRouter = GoRouter(
   initialLocation: Routes.home.path,
   routes: [
+    
     GoRoute(
       name: Routes.home.name,
       path: Routes.home.path,
@@ -14,5 +15,14 @@ final appRouter = GoRouter(
         return const HomeScreen();
       },
     ),
+
+    GoRoute(
+      name: Routes.dashboard.name,
+      path: Routes.dashboard.path,
+      builder: (context, state) {
+        return const DashboardScreen();
+      },
+    ),
+
   ]
 );
