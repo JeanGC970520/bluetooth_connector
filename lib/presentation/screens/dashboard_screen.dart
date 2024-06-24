@@ -24,15 +24,64 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: const Placeholder(),
-      bottomNavigationBar: const BottomNav(),
+      bottomNavigationBar: BottomNav(
+        intialNavItem: 'Search',
+        items: [
+          BottomNavBaseItem(
+            icon: CupertinoIcons.calendar,
+            label: 'Calendar',
+            onTap: () {  },
+          ),
+          
+          BottomNavBaseItem(
+            icon: CupertinoIcons.search,
+            label: 'Search',
+            onTap: () {  },
+          ),
+
+          BottomNavBaseItem(
+            icon: CupertinoIcons.device_phone_portrait,
+            label: 'Chat',
+            onTap: () {  },
+          ),
+        ],
+      ),
     );
   }
 }
 
-class BottomNav extends StatelessWidget {
+class BottomNav extends StatefulWidget {
   const BottomNav({
     super.key,
+    required this.items,
+    this.intialNavItem,
   });
+
+  final List<BottomNavBaseItem> items;
+  final String? intialNavItem;
+
+  @override
+  State<BottomNav> createState() => _BottomNavState();
+}
+
+class _BottomNavState extends State<BottomNav> {
+
+  late String _labelSelected; 
+
+  @override
+  void initState() {
+    super.initState();
+    _labelSelected = widget.items.first.label;
+    if( widget.intialNavItem != null ) {
+      _labelSelected = widget.intialNavItem!;
+    }
+  }
+
+  void updateSelectedItem(String label) {
+    setState(() {
+      _labelSelected = label;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,32 +95,32 @@ class BottomNav extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <BottomNavItem>[
-
-          BottomNavItem(
-            icon: CupertinoIcons.calendar,
-            label: 'Calendar',
-            isSelected: false,
-          ),
-          
-          BottomNavItem(
-            icon: CupertinoIcons.search,
-            label: 'Search',
-            isSelected: true,
-          ),
-
-          BottomNavItem(
-            icon: CupertinoIcons.device_phone_portrait,
-            label: 'Chat',
-            isSelected: false,
-          ),
-
-        ],
+        children: widget.items
+          .map((item) {
+            return BottomNavItem(
+              icon: item.icon,
+              label: item.label,
+              onTap: () {
+                updateSelectedItem(item.label);
+                if(item.onTap != null) item.onTap!();
+              },
+              isSelected: _labelSelected == item.label,
+            );
+          },).toList(),
       ),
     );
   }
+}
+
+class BottomNavBaseItem {
+
+  final IconData icon;
+  final String label;
+  final Function()? onTap;
+
+  BottomNavBaseItem({required this.icon, required this.label, required this.onTap});
 }
 
 class BottomNavItem extends StatelessWidget {
@@ -79,49 +128,51 @@ class BottomNavItem extends StatelessWidget {
     super.key,
     required this.icon,
     required this.label,
+    required this.onTap,
     this.isSelected = false,
   });
 
   final bool isSelected;
   final IconData icon;
   final String label;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      padding: const EdgeInsets.all(10),
-      decoration: isSelected 
-      ? BoxDecoration(
-          color: AppTheme.kSeedColorAlp60,
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: isSelected ?AppTheme.kSeedColorAlp60 : null,
           borderRadius: BorderRadius.circular(50),
-        )
-      : null,
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: size.height * 0.03, 
-            color: isSelected ? AppTheme.kSeedColorBold : Colors.grey,
-          ),
-          Visibility(
-            visible: isSelected,
-            child: Row(
-              children: [
-                const SizedBox(width: 5,),
-                Text(
-                  label,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle( fontSize: size.height * 0.02, color: AppTheme.kSeedColorBold, ),
-                ),
-              ],
-            )
-          ),
-            
-        ],
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: size.height * 0.03, 
+              color: isSelected ? AppTheme.kSeedColorBold : Colors.grey,
+            ),
+            Visibility(
+              visible: isSelected,
+              child: Row(
+                children: [
+                  const SizedBox(width: 5,),
+                  Text(
+                    label,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle( fontSize: size.height * 0.02, color: AppTheme.kSeedColorBold, ),
+                  ),
+                ],
+              ),
+            ),
+              
+          ],
+        ),
       ),
     );
   }
