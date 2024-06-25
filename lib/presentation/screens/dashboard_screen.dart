@@ -1,10 +1,15 @@
 
+import 'package:bluetooth_connector/config/router/routes.dart';
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen({super.key, required this.child, required this.title});
+
+  final Widget child;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +17,11 @@ class DashboardScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const Text('Search Device', style: TextStyle(fontWeight: FontWeight.w500),),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500),),
         actions: [
           IconButton(
             onPressed: () {}, 
@@ -23,26 +29,21 @@ class DashboardScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const Placeholder(),
+      body: child,
       bottomNavigationBar: BottomNav(
         intialNavItem: 'Search',
         items: [
-          BottomNavBaseItem(
-            icon: CupertinoIcons.calendar,
-            label: 'Calendar',
-            onTap: () {  },
-          ),
-          
+
           BottomNavBaseItem(
             icon: CupertinoIcons.search,
             label: 'Search',
-            onTap: () {  },
+            onTap: () => context.go(Routes.search.path),
           ),
 
           BottomNavBaseItem(
             icon: CupertinoIcons.device_phone_portrait,
             label: 'Chat',
-            onTap: () {  },
+            onTap: () => context.go(Routes.chat.path),
           ),
         ],
       ),
