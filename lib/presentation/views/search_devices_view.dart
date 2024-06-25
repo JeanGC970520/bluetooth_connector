@@ -1,7 +1,10 @@
-import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:bluetooth_connector/presentation/widgets/widgets.dart';
+import 'package:bluetooth_connector/presentation/blocs/bloc/bluetooth_bloc.dart';
 
 class SearchDevicesView extends StatelessWidget {
    
@@ -38,7 +41,14 @@ class SearchDevicesView extends StatelessWidget {
 
           const Spacer(),
 
-          const BluetoothScanner(),
+          BlocBuilder<BluetoothBloc, BluetoothState>(
+            builder: (context, state) {
+              return BluetoothScanner(
+                animate: state.blAction.isScanning,
+                onTap: () => context.read<BluetoothBloc>().add(ScanEvent()),
+              );
+            },
+          ),
 
           const Spacer(),
 
