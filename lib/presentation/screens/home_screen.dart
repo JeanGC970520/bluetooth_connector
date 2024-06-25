@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:bluetooth_connector/config/router/routes.dart';
-import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:bluetooth_connector/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,105 +11,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
       
-          const Spacer(flex: 2,),
+          Spacer(flex: 2,),
       
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-
-              
-              const Circle(
-                dotted: true,
-                scale: 0.97,
-                color: Colors.white,
-              ),
+          BluetoothScanner(),
       
-              const Circle(
-                dotted: true,
-                scale: 0.80,
-                color: Colors.white,
-              ),
+          Spacer(),
       
-              Circle(
-                scale: 0.63,
-                color: AppTheme.kSeedColor.withAlpha(50),
-              ),
-      
-              const Circle(
-                scale: 0.45,
-                color: Colors.white,
-              ),
-      
-              DecoratedBox(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppTheme.kSeedColor,
-                      blurRadius: 15.0,
-                    )
-                  ] 
-                ),
-                child: Image.asset(
-                  'assets/images/bluetooth.png',
-                  scale: 2.0,
-                ),
-              ),
-
-              BluetoothDeviceIcon(
-                color: const Color(0xFF676FCF),
-                position: const [
-                  null, 50, 50, null,
-                ],
-                child: Image.asset(
-                  'assets/images/mouse.png',
-                  scale: 3.5,
-                ),
-              ),
-
-              BluetoothDeviceIcon(
-                color: const Color(0xFF66CE8C), 
-                position: const [
-                  40, 35, null, null,
-                ],
-                child: Image.asset(
-                  'assets/images/airpods.png',
-                  scale: 3.5,
-                ), 
-              ),
-
-              BluetoothDeviceIcon(
-                color: const Color(0xFFF2B538),
-                position: const [
-                  null, null, 50, 50,
-                ],
-                child: Image.asset(
-                  'assets/images/keyboard.png',
-                  scale: 3.5,
-                ),
-              ),
-
-              BluetoothDeviceIcon(
-                color: const Color(0xFFF57A37), 
-                position: const [
-                  65, null, null, 65,
-                ],
-                child: Image.asset(
-                  'assets/images/mobile.png',
-                  scale: 3.5,
-                ), 
-              ),
-      
-            ],
-          ),
-      
-          const Spacer(),
-      
-          const _Body(),
+          _Body(),
       
         ],
       ),
