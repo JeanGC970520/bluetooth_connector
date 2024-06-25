@@ -156,7 +156,7 @@ class _Body extends StatelessWidget {
           const SizedBox(height: 20,),
       
           ElevatedButton(
-            onPressed: () => context.go(Routes.dashboard.path),
+            onPressed: () => context.go(Routes.search.path),
             style: ElevatedButton.styleFrom(
               minimumSize: Size(double.infinity, size.height * 0.06)
             ), 
