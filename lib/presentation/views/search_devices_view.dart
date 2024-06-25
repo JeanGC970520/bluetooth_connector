@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:app_settings/app_settings.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
@@ -41,7 +43,32 @@ class SearchDevicesView extends StatelessWidget {
 
           const Spacer(),
 
-          BlocBuilder<BluetoothBloc, BluetoothState>(
+          BlocConsumer<BluetoothBloc, BluetoothState>(
+            listenWhen: (prev, curr) => prev.blStatus != curr.blStatus,
+            listener: (_, state) {
+              if (state.blStatus.isOff) {
+                generalDialog(
+                  context, 
+                  title: 'Bluetooth is off', 
+                  children: [
+                    SizedBox(height: size.height * 0.05,),
+                    Text(
+                      "Should turn on bluetooth to use this app",
+                      style: TextStyle(fontSize: size.height * 0.03, color: AppTheme.kGray),
+                    ),
+                    SizedBox(height: size.height * 0.05,),
+                    ElevatedButton(
+                      onPressed: () => AppSettings.openAppSettings(type: AppSettingsType.bluetooth), 
+                      child: Text(
+                        "Open settings",
+                        style: TextStyle(fontSize: size.height * 0.022, fontWeight: FontWeight.w500,),
+                      )
+                    ),
+                  ],
+                  onClosed: (value) {},
+                );
+              }
+            },
             builder: (context, state) {
               return BluetoothScanner(
                 animate: state.blAction.isScanning,
