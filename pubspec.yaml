@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  app_settings: ^5.1.1
   avatar_glow: ^3.0.1
   cupertino_icons: ^1.0.6
   dotted_border: ^2.1.0
