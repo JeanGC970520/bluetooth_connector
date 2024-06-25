@@ -1,5 +1,6 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+
+import 'package:avatar_glow/avatar_glow.dart';
 
 import '../widgets.dart';
 import '../../../config/theme/app_theme.dart';
@@ -8,7 +9,12 @@ import '../../../config/theme/app_theme.dart';
 class BluetoothScanner extends StatelessWidget {
   const BluetoothScanner({
     super.key,
+    this.animate = false,
+    this.onTap,
   });
+
+  final bool animate;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +47,24 @@ class BluetoothScanner extends StatelessWidget {
           
         AvatarGlow(
           glowCount: 3,
+          animate: animate,
           glowColor: AppTheme.kSeedColorAlp60,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: AppTheme.kSeedColor,
-                  blurRadius: 15.0,
-                )
-              ] 
-            ),
-            child: Image.asset(
-              'assets/images/bluetooth.png',
-              scale: 2.0,
+          child: InkWell(
+            onTap: onTap,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppTheme.kSeedColor,
+                    blurRadius: 15.0,
+                  )
+                ] 
+              ),
+              child: Image.asset(
+                'assets/images/bluetooth.png',
+                scale: 2.0,
+              ),
             ),
           ),
         ),
