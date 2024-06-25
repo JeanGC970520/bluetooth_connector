@@ -45,7 +45,10 @@ class SearchDevicesView extends StatelessWidget {
             builder: (context, state) {
               return BluetoothScanner(
                 animate: state.blAction.isScanning,
-                onTap: () => context.read<BluetoothBloc>().add(ScanEvent()),
+                onTap: () {
+                  if ( state.blStatus.isInitial || state.blStatus.isOff ) return;
+                  context.read<BluetoothBloc>().add(ScanEvent());
+                },
               );
             },
           ),
