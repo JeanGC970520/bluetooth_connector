@@ -13,7 +13,12 @@ enum BluetoothAction {
 enum BluetoothStatus {
   initial,
   off,
-  on,
+  on;
+
+  bool get isInitial => this == BluetoothStatus.initial;
+  bool get isOff => this == BluetoothStatus.off;
+  bool get isOn => this == BluetoothStatus.on;
+
 }
 
 class BluetoothState extends Equatable {
@@ -24,9 +29,12 @@ class BluetoothState extends Equatable {
 
   final BluetoothStatus blStatus;
   final BluetoothAction blAction;
-  
+
   @override
-  List<Object> get props => [ blStatus, blAction, ];
+  List<Object> get props => [
+        blStatus,
+        blAction,
+      ];
 
   BluetoothState copyWith({
     BluetoothStatus? blStatus,
@@ -37,5 +45,4 @@ class BluetoothState extends Equatable {
       blAction: blAction ?? this.blAction,
     );
   }
-
-} 
+}

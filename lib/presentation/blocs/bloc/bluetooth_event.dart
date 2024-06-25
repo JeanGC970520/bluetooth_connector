@@ -8,3 +8,11 @@ sealed class BluetoothEvent extends Equatable {
 }
 
 class ScanEvent extends BluetoothEvent {}
+
+class UpdateBlueStatusEvent extends BluetoothEvent {
+  
+  final BluetoothStatus status;
+
+  const UpdateBlueStatusEvent(this.status);
+  
+}
