@@ -1,10 +1,10 @@
-import 'package:bluetooth_connector/config/router/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dotted_border/dotted_border.dart';
-
-import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
+
+import 'package:bluetooth_connector/config/router/routes.dart';
+import 'package:bluetooth_connector/config/theme/app_theme.dart';
+import 'package:bluetooth_connector/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -167,88 +167,6 @@ class _Body extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class BluetoothDeviceIcon extends StatelessWidget {
-  const BluetoothDeviceIcon({
-    super.key,
-    required this.color,
-    required this.child,
-    required this.position,
-  });
-
-  final Color color;
-  final Widget child;
-  final List<double?> position;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: position[0],
-      right: position[1],
-      bottom: position[2],
-      left: position[3],
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: color,
-              blurRadius: 7.5
-            )
-          ]
-        ),
-        child: child,
-      ),
-    );
-  }
-}
-
-class Circle extends StatelessWidget {
-  const Circle({
-    super.key,
-    required this.scale,
-    required this.color,
-    this.dotted = false,
-  });
-
-  final double scale;
-  final Color color;
-  final bool dotted;
-
-  @override
-  Widget build(BuildContext context) {
-
-    final size = MediaQuery.of(context).size;
-    
-    if(dotted) {
-      return DottedBorder(
-        color: AppTheme.kSeedColor.withAlpha(100),
-        strokeWidth: 2.0,
-        dashPattern: const [18, 10],
-        borderType: BorderType.Circle,
-        child: Container(
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(1000 * scale),
-          ),
-          width: size.width * scale,
-          height: size.width * scale,
-        ),
-      );
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(1000 * scale),
-      ),
-      width: size.width * scale,
-      height: size.width * scale,
     );
   }
 }
