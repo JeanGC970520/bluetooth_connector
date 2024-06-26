@@ -7,7 +7,7 @@ abstract class BlueDatasource<T> {
 
   late Stream<T> blueStatus;
 
-  late Stream<List<BlueDevice>?> scanResults; 
+  late Stream<BlueDevice?> scanResults; 
 
   Future<void> scan();
 

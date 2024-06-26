@@ -6,7 +6,7 @@ abstract class BlueRepository<T> {
 
   late Stream<T> blueStatus;
 
-  late Stream<List<BlueDevice>?> scanResults; 
+  late Stream<BlueDevice?> scanResults; 
 
   Future<void> scan();
 
