@@ -1,7 +1,9 @@
-import 'package:bluetooth_connector/domain/datasource/blue_datasource.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'package:bluetooth_connector/logger.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:bluetooth_connector/domain/datasource/blue_datasource.dart';
+import 'package:bluetooth_connector/infrastructure/mappers/blue_mapper.dart';
+import 'package:bluetooth_connector/infrastructure/models/scan_result_blue_plus.dart';
 
 class BluePlusDatasource extends BlueDatasource {
 
@@ -20,17 +22,7 @@ class BluePlusDatasource extends BlueDatasource {
 
     try {
 
-      try {
-
-        scanResults = FlutterBluePlus.onScanResults.asyncMap(
-          (result) {
-            return null;
-          },
-        );
-        
-      } catch (e) {
-        logger.e("Error on listen scaned devices");
-      }
+      mapStreamScanResults();
 
       final isScanning = FlutterBluePlus.isScanningNow;
       logger.d("Is scanning: $isScanning");
@@ -42,7 +34,26 @@ class BluePlusDatasource extends BlueDatasource {
       logger.e("Error on scan: $e");
     }
 
+  }
 
+  void mapStreamScanResults() {
+    try {
+
+      scanResults = FlutterBluePlus.onScanResults.asyncMap(
+        (result) {
+          if (result.isEmpty || result.last.device.advName.isEmpty) return null;
+
+          final model  = ScanResultBluePlusModel.fromResult(result.last);
+
+          final blueDevice = BlueMapper.scanResultToEntity(model);
+      
+          return blueDevice;
+        },
+      );
+      
+    } catch (e) {
+      logger.e("Error on listen scaned devices: $e");
+    }
   }
 
 }
