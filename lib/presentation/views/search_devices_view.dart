@@ -1,3 +1,4 @@
+import 'package:bluetooth_connector/logger.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_settings/app_settings.dart';
@@ -70,6 +71,7 @@ class SearchDevicesView extends StatelessWidget {
               }
             },
             builder: (context, state) {
+              logger.d("${state.devices}");
               return BluetoothScanner(
                 animate: state.blAction.isScanning,
                 onTap: () {

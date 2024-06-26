@@ -16,3 +16,11 @@ class UpdateBlueStatusEvent extends BluetoothEvent {
   const UpdateBlueStatusEvent(this.status);
   
 }
+
+class AddScanedDeviceEvent extends BluetoothEvent {
+
+  final BlueDevice device;
+
+  const AddScanedDeviceEvent(this.device);
+
+}
