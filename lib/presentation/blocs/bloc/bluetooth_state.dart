@@ -1,34 +1,13 @@
 part of 'bluetooth_bloc.dart';
 
-enum BluetoothAction {
-  initial,
-  scanning,
-  scanned;
-
-  bool get isInitial => this == BluetoothAction.initial;
-  bool get isScanning => this == BluetoothAction.scanning;
-  bool get isScanned => this == BluetoothAction.scanned;
-}
-
-enum BluetoothStatus {
-  initial,
-  off,
-  on;
-
-  bool get isInitial => this == BluetoothStatus.initial;
-  bool get isOff => this == BluetoothStatus.off;
-  bool get isOn => this == BluetoothStatus.on;
-
-}
-
 class BluetoothState extends Equatable {
   const BluetoothState({
     this.blStatus = BluetoothStatus.initial,
-    this.blAction = BluetoothAction.initial,
+    this.blAction = BluetoothActions.initial,
   });
 
   final BluetoothStatus blStatus;
-  final BluetoothAction blAction;
+  final BluetoothActions blAction;
 
   @override
   List<Object> get props => [
@@ -38,7 +17,7 @@ class BluetoothState extends Equatable {
 
   BluetoothState copyWith({
     BluetoothStatus? blStatus,
-    BluetoothAction? blAction,
+    BluetoothActions? blAction,
   }) {
     return BluetoothState(
       blStatus: blStatus ?? this.blStatus,
