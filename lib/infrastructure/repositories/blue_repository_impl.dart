@@ -28,6 +28,6 @@ class BlueRepositoryImpl extends BlueRepository {
   Stream get blueStatus => datasource.blueStatus;
 
   @override
-  Stream<List<BlueDevice>?> get scanResults => datasource.scanResults;
+  Stream<BlueDevice?> get scanResults => datasource.scanResults;
   
 }
