@@ -72,35 +72,22 @@ class _Body extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
 
+              if ( await FlutterBluePlus.isSupported == false ) {
+                logger.w("OH!! Bluetooth not supperted by this device");
+                return;
+              }
+
               Map<Permission, PermissionStatus> statuses = await [
                 Permission.bluetooth,
                 Permission.location,
                 Permission.notification,
               ].request();
 
-              // TODO: Do something to verify permissions
-              statuses.forEach((key, value) {
-                logger.d("Perm: $key => status: $value");
+              statuses.forEach((permission, status) {
+                logger.d("Perm: $permission => status: $status");
+                if(status.isDenied) return;
               },);
-
-              // PermissionStatus status = await Permission.bluetooth.status;
-              // logger.i("Bluetooth permission initial status: $status");
-
-              // if ( status.isDenied ) {
-              //   status = await Permission.bluetooth.request();
-              // }
-
-              // logger.i("Bluetooth permission final status: $status");
-
-              // if ( await Permission.bluetooth.status.isPermanentlyDenied ){
-              //   logger.i("Open bluetooth settings");
-              // }
               
-              if ( await FlutterBluePlus.isSupported == false ) {
-                logger.w("OH!! Bluetooth not supperted by this device");
-                return;
-              }
-
               Future.delayed(const Duration())
                 .then((value) => context.go(Routes.search.path),);
             
