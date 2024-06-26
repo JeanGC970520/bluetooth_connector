@@ -14,6 +14,10 @@ class AppTheme {
   static const Color kSeedColorBold = Color.fromARGB(255, 89, 181, 235);
   static const Color kWhite = Color.fromARGB(255, 247, 244, 244);
   static const Color kGray = Color.fromARGB(181, 145, 144, 144);
+  static const Color kGreen = Color(0xFF66CE8C);
+  static const Color kOrange = Color(0xFFF57A37);
+  static const Color kYellow = Color(0xFFF2B538);
+  static const Color kPurple = Color(0xFF676FCF);
 
   ThemeData getTheme() {
     return ThemeData(
