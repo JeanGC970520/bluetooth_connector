@@ -14,6 +14,8 @@ class BlueMapper {
       id: model.id,
       rssi: model.rssi?.toString(),
       deviceClass: int.parse(serviceUuids ?? '0', radix: 16),
+      connectable: model.connectable ?? false,
+      appearance: BlueAppearance(model.appearance ?? 0),
     );
   }
 

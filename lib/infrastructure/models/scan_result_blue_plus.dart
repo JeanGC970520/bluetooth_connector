@@ -12,6 +12,7 @@ class ScanResultBluePlusModel {
   final bool? connectable;
   final List<String?>? serviceUuids;
   final int? rssi;
+  final int? appearance;
 
   ScanResultBluePlusModel({
     required this.name, 
@@ -20,6 +21,7 @@ class ScanResultBluePlusModel {
     required this.connectable, 
     required this.serviceUuids,
     required this.rssi,
+    required this.appearance,
   });
 
   factory ScanResultBluePlusModel.fromResult( ScanResult res ) {
@@ -29,7 +31,8 @@ class ScanResultBluePlusModel {
       txPower: res.advertisementData.txPowerLevel,
       connectable: res.advertisementData.connectable,
       serviceUuids: res.advertisementData.serviceUuids.map((e) => e.toString(),).toList(), 
-      rssi: null,
+      rssi: res.rssi,
+      appearance: res.advertisementData.appearance,
     );
   }
 
@@ -41,6 +44,7 @@ class ScanResultBluePlusModel {
       connectable: json['connectable'],
       serviceUuids: json['serviceUuids'], 
       rssi: json['rssi'],
+      appearance: json['appearance']
     );
   }
 
@@ -53,6 +57,7 @@ class ScanResultBluePlusModel {
     'connectable' : connectable,
     'serviceUuids' : serviceUuids,
     'rssi' : rssi,
+    'appearance' : appearance
   };
 
   String toJson() => json.encode(toMap());
