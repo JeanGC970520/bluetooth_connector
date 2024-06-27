@@ -29,6 +29,8 @@ class BlueDevice {
         return ('assets/images/airpods.png',AppTheme.kGreen);
       case 0xFE03: // Audio/video
         return ('assets/images/airpods.png',AppTheme.kGreen);
+      case 0xFD82: // Audio/video
+        return ('assets/images/airpods.png',AppTheme.kGreen);
       default: // Other.
         return (null, AppTheme.kSeedColor);
     }
