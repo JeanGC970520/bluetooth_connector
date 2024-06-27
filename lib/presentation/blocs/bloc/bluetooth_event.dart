@@ -24,3 +24,13 @@ class AddScanedDeviceEvent extends BluetoothEvent {
   const AddScanedDeviceEvent(this.device);
 
 }
+
+class ConnectEvent extends BluetoothEvent {
+
+  final BlueDevice device;
+
+  const ConnectEvent(this.device);
+
+}
+
+class DisconnectEvent extends BluetoothEvent {}

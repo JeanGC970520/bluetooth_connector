@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets.dart';
+import '../../blocs/bloc/bluetooth_bloc.dart';
 import '../../../config/theme/app_theme.dart';
 import '../../../domain/entities/blue_device.dart';
 
@@ -150,7 +152,7 @@ class BluetoothScanner extends StatelessWidget {
             ElevatedButton(
               onPressed: !device.connectable 
               ? null
-              : () {}, 
+              : () => context.read<BluetoothBloc>().add(ConnectEvent(device)), 
               child: const Text("Connect")
             ),
           ],

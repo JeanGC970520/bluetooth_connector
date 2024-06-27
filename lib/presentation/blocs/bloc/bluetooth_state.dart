@@ -5,18 +5,21 @@ class BluetoothState extends Equatable {
     this.blStatus = BluetoothStatus.initial,
     this.blAction = BluetoothActions.initial,
     this.devices = const <BlueDevice>[],
+    this.deviceConnected = const BlueDevice.unknown(),
   });
 
   final BluetoothStatus blStatus;
   final BluetoothActions blAction;
   final List<BlueDevice> devices;
+  final BlueDevice deviceConnected;
 
   @override
   List<Object> get props => [
-        blStatus,
-        blAction,
-        devices,
-      ];
+    blStatus,
+    blAction,
+    devices,
+    deviceConnected,
+  ];
 
   BluetoothState copyWith({
     BluetoothStatus? blStatus,

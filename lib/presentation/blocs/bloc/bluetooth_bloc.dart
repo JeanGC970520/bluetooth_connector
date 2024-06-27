@@ -30,6 +30,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     on<ScanEvent>(_mapScanEventToState);
     on<UpdateBlueStatusEvent>(_mapUpdateBlueStatusEventToState);
     on<AddScanedDeviceEvent>(_mapAddScanedDeviceEventToState);
+    on<ConnectEvent>(_mapConnectEventToState);
+    on<DisconnectEvent>(_mapDisconnectEventToState);
   }
 
   @override
@@ -103,6 +105,18 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
       state.copyWith(devices: [...state.devices, event.device])
     );
 
+  }
+
+  void _mapConnectEventToState(
+    ConnectEvent event, Emitter<BluetoothState> emit,
+  ) {
+
+  }
+
+  void _mapDisconnectEventToState(
+    DisconnectEvent event, Emitter<BluetoothState> emit,
+  ) {
+    
   }
 
 }
