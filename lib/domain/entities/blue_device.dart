@@ -55,7 +55,7 @@ class BlueAppearance {
 
   final int _value;
 
-  BlueAppearance(int value): _value=value;
+  const BlueAppearance(int value): _value=value;
 
   String? get value => _type.containsKey(_value) ? _type[_value] : _type[0];
 
@@ -70,7 +70,7 @@ class BlueDevice {
   final bool connectable;
   final BlueAppearance? appearance;
 
-  BlueDevice({
+  const BlueDevice({
     required this.name, 
     required this.id, 
     required this.rssi,
@@ -78,6 +78,15 @@ class BlueDevice {
     required this.connectable,
     required this.appearance,
   });
+
+  const BlueDevice.unknown() : this(
+    name: 'UNKNOWN',
+    id: 'UNKNOWN',
+    rssi: null,
+    appearance: const BlueAppearance(0),
+    connectable: false,
+    deviceClass: null,
+  );
 
   (String?, Color) getImageAndColor() {
     switch (deviceClass) {
