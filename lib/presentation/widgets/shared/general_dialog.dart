@@ -10,6 +10,7 @@ Future<Object?> generalDialog(
     bool extendBody = false,
     bool dismissible = true,
     AxisDirection direction = AxisDirection.down,
+    CrossAxisAlignment align = CrossAxisAlignment.center,
   }
 ) {
 
@@ -50,6 +51,7 @@ Future<Object?> generalDialog(
               children: [
                 SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: align,
                     children: [
                       if( !extendBody ) 
                         Text(
