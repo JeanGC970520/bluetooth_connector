@@ -77,6 +77,7 @@ class SearchDevicesView extends StatelessWidget {
                   if ( state.blStatus.isInitial || state.blStatus.isOff ) return;
                   context.read<BluetoothBloc>().add(ScanEvent());
                 },
+                devices: state.devices,
               );
             },
           ),
