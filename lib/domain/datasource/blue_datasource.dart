@@ -11,8 +11,10 @@ abstract class BlueDatasource<T> {
 
   Future<void> scan();
 
-  Future<bool> connect();
+  Future<bool> connect(BlueDevice blDevice);
 
-  Future<bool> disconnect();
+  Future<bool> disconnect(BlueDevice blDevice);
+
+  Future<void> write(String text);
 
 }
