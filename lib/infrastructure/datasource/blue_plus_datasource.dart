@@ -42,6 +42,7 @@ class BluePlusDatasource extends BlueDatasource {
       scanResults = FlutterBluePlus.onScanResults.asyncMap(
         (result) {
           if (result.isEmpty || result.last.device.advName.isEmpty) return null;
+          // logger.d("Crude device: ${result.last.advertisementData} -- ${result.last.device}");
 
           final model  = ScanResultBluePlusModel.fromResult(result.last);
 
