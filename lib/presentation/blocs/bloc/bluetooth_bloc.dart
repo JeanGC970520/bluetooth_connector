@@ -61,6 +61,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     emit(
       state.copyWith(
         blAction: BluetoothActions.scanning,
+        devices: List.empty(),
       ),
     );
     
@@ -99,7 +100,7 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     }
 
     emit(
-      state.copyWith(devices: {...state.devices, event.device})
+      state.copyWith(devices: [...state.devices, event.device])
     );
 
   }
