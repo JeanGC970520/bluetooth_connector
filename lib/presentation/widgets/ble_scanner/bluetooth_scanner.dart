@@ -91,13 +91,14 @@ class BluetoothScanner extends StatelessWidget {
                 ? Icon(
                     CupertinoIcons.bluetooth, 
                     color: AppTheme.kWhite,
-                    size: MediaQuery.of(context).size.height * 0.035,
+                    size: MediaQuery.of(context).size.height * 0.04,
                   )
                 : Image.asset(
-                    'assets/images/mouse.png',
+                    image,
                     scale: 3.5,
-                    color: AppTheme.kWhite,
+                    color: color == AppTheme.kGreen ? null : AppTheme.kWhite,
                   ),
+                onTap: () => onTapDevice(context, device),
               );
             },
           ),
@@ -106,6 +107,57 @@ class BluetoothScanner extends StatelessWidget {
           ...fakeDevices(),
 
       ],
+    );
+  }
+
+  Future<Object?> onTapDevice(BuildContext context, BlueDevice device) {
+    final size = MediaQuery.of(context).size;
+    final textStyle = TextStyle(
+      color: Colors.black87,
+      fontWeight: FontWeight.w500, 
+      fontSize: size.height * 0.022,
+    );
+    return generalDialog(
+      context, 
+      title: device.name,
+      align: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: size.height * 0.01,),
+        Text(
+          "ID: ${device.id}",
+          style: textStyle,
+        ),
+        
+        Text(
+          "RSSI: ${device.rssi ?? 'UKNOWN'} dBm",
+          style: textStyle,
+        ),
+        
+        Text(
+          "Connectable: ${device.connectable ? 'YES' : 'NO'}",
+          style: textStyle,
+        ),
+
+        Text(
+          "Appearance: ${device.appearance!.value}",
+          style: textStyle,
+        ),
+
+        SizedBox(height: size.height * 0.02,),
+        Row(
+          children: [
+            const Spacer(),
+            ElevatedButton(
+              onPressed: !device.connectable 
+              ? null
+              : () {}, 
+              child: const Text("Connect")
+            ),
+          ],
+        ),
+
+      ], 
+      onClosed: (value) {},
     );
   }
 
