@@ -10,13 +10,13 @@ class BlueRepositoryImpl extends BlueRepository {
   BlueRepositoryImpl(this.datasource);
 
   @override
-  Future<bool> connect() {
-    return datasource.connect();
+  Future<bool> connect( BlueDevice blDevice) {
+    return datasource.connect(blDevice);
   }
 
   @override
-  Future<bool> disconnect() {
-    return datasource.disconnect();
+  Future<bool> disconnect( BlueDevice blDevice) {
+    return datasource.disconnect(blDevice);
   }
 
   @override
@@ -29,5 +29,10 @@ class BlueRepositoryImpl extends BlueRepository {
 
   @override
   Stream<BlueDevice?> get scanResults => datasource.scanResults;
+  
+  @override
+  Future<void> write(String text) {
+    return datasource.write(text);
+  }
   
 }
