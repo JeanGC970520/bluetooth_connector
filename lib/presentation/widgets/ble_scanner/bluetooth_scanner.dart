@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:avatar_glow/avatar_glow.dart';
 
 import '../widgets.dart';
 import '../../../config/theme/app_theme.dart';
+import '../../../domain/entities/blue_device.dart';
 
 
 class BluetoothScanner extends StatelessWidget {
@@ -11,10 +15,12 @@ class BluetoothScanner extends StatelessWidget {
     super.key,
     this.animate = false,
     this.onTap,
+    this.devices,
   });
 
   final bool animate;
   final Function()? onTap;
+  final List<BlueDevice>? devices;
 
   @override
   Widget build(BuildContext context) {
@@ -68,55 +74,85 @@ class BluetoothScanner extends StatelessWidget {
             ),
           ),
         ),
-    
-        BluetoothDeviceIcon(
-          color: const Color(0xFF676FCF),
-          position: const [
-            null, 50, 50, null,
-          ],
-          child: Image.asset(
-            'assets/images/mouse.png',
-            scale: 3.5,
-            color: AppTheme.kWhite,
+
+        if(devices != null )
+          ...devices!.map((device) {
+              final (image, color) =  device.getImageAndColor();
+              final degreesPerDevice = 360 / (devices!.length);  // Number of divisions
+              final theta = degreesPerDevice * devices!.indexOf(device); // Grados
+              final radians = (theta * pi) / 180;
+              final x = -50 * cos(radians);
+              final y = -50 * sin(radians);
+              return BluetoothDeviceIcon(
+                x: x,
+                y: y,
+                color: color,
+                child: image == null 
+                ? Icon(
+                    CupertinoIcons.bluetooth, 
+                    color: AppTheme.kWhite,
+                    size: MediaQuery.of(context).size.height * 0.035,
+                  )
+                : Image.asset(
+                    'assets/images/mouse.png',
+                    scale: 3.5,
+                    color: AppTheme.kWhite,
+                  ),
+              );
+            },
           ),
-        ),
-    
-        BluetoothDeviceIcon(
-          color: const Color(0xFF66CE8C), 
-          position: const [
-            40, 35, null, null,
-          ],
-          child: Image.asset(
-            'assets/images/airpods.png',
-            scale: 3.5,
-          ), 
-        ),
-    
-        BluetoothDeviceIcon(
-          color: const Color(0xFFF2B538),
-          position: const [
-            null, null, 50, 50,
-          ],
-          child: Image.asset(
-            'assets/images/keyboard.png',
-            scale: 3.5,
-            color: AppTheme.kWhite,
-          ),
-        ),
-    
-        BluetoothDeviceIcon(
-          color: const Color(0xFFF57A37), 
-          position: const [
-            65, null, null, 65,
-          ],
-          child: Image.asset(
-            'assets/images/mobile.png',
-            scale: 3.5,
-            color: AppTheme.kWhite,
-          ), 
-        ),
-          
+
+        if(devices == null)
+          ...fakeDevices(),
+
       ],
     );
+  }
+
+  List<Widget> fakeDevices() {
+    return [
+      BluetoothDeviceIcon(
+        color: AppTheme.kPurple,
+        x: 50,
+        y: -50,
+        child: Image.asset(
+          'assets/images/mouse.png',
+          scale: 3.5,
+          color: AppTheme.kWhite,
+        ),
+      ),
+
+      BluetoothDeviceIcon(
+        color: AppTheme.kGreen, 
+        x: 40,
+        y: 50,
+        child: Image.asset(
+          'assets/images/airpods.png',
+          scale: 3.5,
+        ), 
+      ),
+  
+      BluetoothDeviceIcon(
+        color: AppTheme.kYellow,
+        x: -60,
+        y: -30,
+        child: Image.asset(
+          'assets/images/keyboard.png',
+          scale: 3.5,
+          color: AppTheme.kWhite,
+        ),
+      ),
+  
+      BluetoothDeviceIcon(
+        color: AppTheme.kOrange, 
+        x: -60,
+        y: 40,
+        child: Image.asset(
+          'assets/images/mobile.png',
+          scale: 3.5,
+          color: AppTheme.kWhite,
+        ), 
+      ),
+    ]; 
   }
 }
