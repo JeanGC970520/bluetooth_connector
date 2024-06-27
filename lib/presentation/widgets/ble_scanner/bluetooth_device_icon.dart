@@ -5,20 +5,22 @@ class BluetoothDeviceIcon extends StatelessWidget {
     super.key,
     required this.color,
     required this.child,
-    required this.position,
+    this.x = 0,
+    this.y = 0,
   });
 
   final Color color;
   final Widget child;
-  final List<double?> position;
+  final double x;
+  final double y;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: position[0],
-      right: position[1],
-      bottom: position[2],
-      left: position[3],
+      top: y >= 0 ? y : null,
+      right: x >= 0 ? x : null,
+      bottom: y < 0 ? -1 * y : null,
+      left: x < 0 ? -1 * x : null,
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
