@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 import 'package:bluetooth_connector/logger.dart';
 import 'package:bluetooth_connector/domain/entities/blue_device.dart';
@@ -57,9 +57,9 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     ScanEvent _, Emitter<BluetoothState> emit,
   ) async {
     logger.i("Starting to scan devices");
-    logger.d("${await Permission.bluetoothScan.status}");
-    logger.d("${await Permission.location.status}");
-    logger.d("${await Permission.notification.status}");
+    // logger.d("${await Permission.bluetoothScan.status}");
+    // logger.d("${await Permission.location.status}");
+    // logger.d("${await Permission.notification.status}");
     emit(
       state.copyWith(
         blAction: BluetoothActions.scanning,
@@ -107,9 +107,12 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
 
   }
 
-  void _mapConnectEventToState(
+  Future<void> _mapConnectEventToState(
     ConnectEvent event, Emitter<BluetoothState> emit,
-  ) {
+  ) async {
+
+    final status = await repo.connect(event.device);
+    logger.i("Connection was: $status");
 
   }
 
