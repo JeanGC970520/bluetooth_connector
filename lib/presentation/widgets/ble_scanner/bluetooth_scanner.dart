@@ -7,6 +7,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets.dart';
+// import '../../../logger.dart';
 import '../../blocs/bloc/bluetooth_bloc.dart';
 import '../../../config/theme/app_theme.dart';
 import '../../../domain/entities/blue_device.dart';
@@ -78,8 +79,12 @@ class BluetoothScanner extends StatelessWidget {
               final degreesPerDevice = 360 / (devices!.length); // Number of divisions
               final theta = degreesPerDevice * devices!.indexOf(device); // Grados
               final radians = (theta * pi) / 180;
-              final x = -50 * cos(radians);
-              final y = -50 * sin(radians);
+              // Converting polar coordinates to rectangular.
+              double r = double.tryParse(device.rssi ?? '-60') ?? -60; 
+              // r = (size.width / 2) + r;
+              // logger.d("Radius: $r - Screen size: $size");
+              final x = r * cos(radians);
+              final y = r * sin(radians);
               // logger.d("${deviceConnected!.id} == ${device.id}");
               return BluetoothDeviceIcon(
                 x: x,
