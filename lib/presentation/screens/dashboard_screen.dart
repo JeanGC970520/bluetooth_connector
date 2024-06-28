@@ -28,15 +28,13 @@ class DashboardScreen extends StatelessWidget {
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500),),
         actions: [
 
-          BlocSelector<BluetoothBloc, BluetoothState, bool>(
-            selector: (state) {
-              return state.blAction.isConnected;
-            },
+          BlocBuilder<BluetoothBloc, BluetoothState>(
+            buildWhen: (prev, curr) => prev.blAction != curr.blAction,
             builder: (context, state) {
               return Visibility(
-                visible: state,
+                visible: state.blAction.isConnected,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () => context.read<BluetoothBloc>().add(DisconnectEvent(state.deviceConnected)),
                   child: Image.asset(
                     'assets/images/disconnected.png',
                     scale: 2.2,
