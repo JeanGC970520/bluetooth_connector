@@ -8,6 +8,7 @@ class BluetoothDeviceIcon extends StatelessWidget {
     this.x = 0,
     this.y = 0,
     this.onTap,
+    this.connected = false,
   });
 
   final Color color;
@@ -15,6 +16,7 @@ class BluetoothDeviceIcon extends StatelessWidget {
   final double x;
   final double y;
   final VoidCallback? onTap;
+  final bool connected;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +27,35 @@ class BluetoothDeviceIcon extends StatelessWidget {
       left: x < 0 ? -1 * x : null,
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
                 color: color,
-                blurRadius: 7.5
-              )
-            ]
-          ),
-          child: child,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: color,
+                    blurRadius: 7.5
+                  )
+                ]
+              ),
+              child: child,
+            ),
+
+            Visibility(
+              visible: connected,
+              child: Positioned(
+                top: 0,
+                right: 0,
+                child: Image.asset(
+                  'assets/images/rounded_conn.png',
+                  scale: 2.7,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
