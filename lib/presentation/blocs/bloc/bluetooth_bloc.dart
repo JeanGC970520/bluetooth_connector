@@ -111,14 +111,38 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     ConnectEvent event, Emitter<BluetoothState> emit,
   ) async {
 
+    emit(
+      state.copyWith(
+        blAction: BluetoothActions.connecting,
+      ),
+    );
+
     final status = await repo.connect(event.device);
     logger.i("Connection was: $status");
+
+    final blAction = status ? BluetoothActions.connected : BluetoothActions.initial;
+    emit(
+      state.copyWith(
+        blAction: blAction,
+        deviceConnected: status ? event.device : state.deviceConnected,
+      ),
+    );
 
   }
 
   void _mapDisconnectEventToState(
     DisconnectEvent event, Emitter<BluetoothState> emit,
-  ) {
+  ) async {
+
+    final status = await repo.disconnect(event.device);
+
+    final blAction = status ? BluetoothActions.initial : BluetoothActions.connected;
+    emit(
+      state.copyWith(
+        blAction: blAction,
+        deviceConnected: status ? const BlueDevice.unknown() : state.deviceConnected,
+      ),
+    );
     
   }
 
