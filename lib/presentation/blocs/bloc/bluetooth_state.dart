@@ -25,11 +25,13 @@ class BluetoothState extends Equatable {
     BluetoothStatus? blStatus,
     BluetoothActions? blAction,
     List<BlueDevice>? devices,
+    BlueDevice? deviceConnected,
   }) {
     return BluetoothState(
       blStatus: blStatus ?? this.blStatus,
       blAction: blAction ?? this.blAction,
       devices: devices ?? this.devices,
+      deviceConnected: deviceConnected ?? this.deviceConnected,
     );
   }
 }
