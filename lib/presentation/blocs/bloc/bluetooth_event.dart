@@ -33,4 +33,10 @@ class ConnectEvent extends BluetoothEvent {
 
 }
 
-class DisconnectEvent extends BluetoothEvent {}
+class DisconnectEvent extends BluetoothEvent {
+
+  final BlueDevice device;
+
+  const DisconnectEvent(this.device);
+
+}
