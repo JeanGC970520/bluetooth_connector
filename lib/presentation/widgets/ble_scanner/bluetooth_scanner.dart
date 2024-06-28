@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:bluetooth_connector/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -81,7 +80,7 @@ class BluetoothScanner extends StatelessWidget {
               final radians = (theta * pi) / 180;
               final x = -50 * cos(radians);
               final y = -50 * sin(radians);
-              logger.d("${deviceConnected!.id} == ${device.id}");
+              // logger.d("${deviceConnected!.id} == ${device.id}");
               return BluetoothDeviceIcon(
                 x: x,
                 y: y,
