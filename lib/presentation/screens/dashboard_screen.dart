@@ -1,9 +1,13 @@
 
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:bluetooth_connector/config/router/routes.dart';
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:bluetooth_connector/presentation/blocs/bloc/bluetooth_bloc.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key, required this.child, required this.title});
@@ -23,10 +27,29 @@ class DashboardScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500),),
         actions: [
+
+          BlocSelector<BluetoothBloc, BluetoothState, bool>(
+            selector: (state) {
+              return state.blAction.isConnected;
+            },
+            builder: (context, state) {
+              return Visibility(
+                visible: state,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Image.asset(
+                    'assets/images/disconnected.png',
+                    scale: 2.2,
+                  ),
+                ),
+              );
+            },
+          ),
+
           IconButton(
             onPressed: () {}, 
             icon: Icon(Icons.settings_outlined, size: size.height * 0.035, color: Colors.grey,),
-          )
+          ),
         ],
       ),
       body: child,
