@@ -134,6 +134,8 @@ class BluetoothBloc extends Bloc<BluetoothEvent, BluetoothState> {
     DisconnectEvent event, Emitter<BluetoothState> emit,
   ) async {
 
+    while (state.blAction.isScanning) {}
+
     final status = await repo.disconnect(event.device);
 
     final blAction = status ? BluetoothActions.initial : BluetoothActions.connected;

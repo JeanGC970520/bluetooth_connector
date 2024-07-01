@@ -18,6 +18,9 @@ class BluePlusDatasource extends BlueDatasource {
       return element.device.remoteId.toString() == blDevice.id;
     },).device;
     try {
+
+      if(FlutterBluePlus.isScanningNow) await FlutterBluePlus.stopScan();
+      
       await device.connect();
       final services = await device.discoverServices();
       // for (var service in services) {
