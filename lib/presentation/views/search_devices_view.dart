@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:bluetooth_connector/logger.dart';
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:bluetooth_connector/presentation/widgets/widgets.dart';
-import 'package:bluetooth_connector/presentation/blocs/bloc/bluetooth_bloc.dart';
+import 'package:bluetooth_connector/presentation/blocs/bluetooth/bluetooth_bloc.dart';
 
 class SearchDevicesView extends StatelessWidget {
    

@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:bluetooth_connector/config/router/routes.dart';
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
-import 'package:bluetooth_connector/presentation/blocs/bloc/bluetooth_bloc.dart';
+import 'package:bluetooth_connector/presentation/blocs/bluetooth/bluetooth_bloc.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key, required this.child, required this.title});

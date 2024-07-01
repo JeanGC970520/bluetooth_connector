@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets.dart';
 // import '../../../logger.dart';
-import '../../blocs/bloc/bluetooth_bloc.dart';
+import '../../blocs/bluetooth/bluetooth_bloc.dart';
 import '../../../config/theme/app_theme.dart';
 import '../../../domain/entities/blue_device.dart';
 

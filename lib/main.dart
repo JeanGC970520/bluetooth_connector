@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bluetooth_connector/config/theme/app_theme.dart';
 import 'package:bluetooth_connector/config/router/app_router.dart';
-import 'package:bluetooth_connector/presentation/blocs/bloc/bluetooth_bloc.dart';
+import 'package:bluetooth_connector/presentation/blocs/bluetooth/bluetooth_bloc.dart';
 import 'package:bluetooth_connector/infrastructure/datasource/blue_plus_datasource.dart';
 import 'package:bluetooth_connector/infrastructure/repositories/blue_repository_impl.dart';
 
