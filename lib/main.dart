@@ -7,8 +7,10 @@ import 'package:bluetooth_connector/config/router/app_router.dart';
 import 'package:bluetooth_connector/presentation/blocs/bluetooth/bluetooth_bloc.dart';
 import 'package:bluetooth_connector/infrastructure/datasource/blue_plus_datasource.dart';
 import 'package:bluetooth_connector/infrastructure/repositories/blue_repository_impl.dart';
+import 'package:bluetooth_connector/presentation/blocs/observer/simple_bloc_observer.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObserver(); //TODO_: Remove in production
   runApp(RepositoryProvider(
     create: (context) => BlueRepositoryImpl(BluePlusDatasource()),
     child: const MyApp(),
